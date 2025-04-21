@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "18372020496",
+    "project_id": "flash-meet-app",
+    "storage_bucket": "flash-meet-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18372020496:android:c2effc060d6f386c1bfd95",
+        "android_client_info": {
+          "package_name": "com.example.flash_meeting_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "18372020496-8djvne4q3e5shdcb6e5bnenj9hom193t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg1bXtdT1at1wy8lB3TvPcn2x6-HphDps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "18372020496-8djvne4q3e5shdcb6e5bnenj9hom193t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
