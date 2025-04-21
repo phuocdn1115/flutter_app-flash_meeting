@@ -25,16 +25,19 @@ class AppTheme {
           fontSize: 20,
           fontWeight: FontWeight.w600,
           fontFamily: AppFonts.fontFamily,
+          color: AppColors.text,
         ),
         headlineMedium: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w400,
           fontFamily: AppFonts.fontFamily,
+          color: AppColors.text,
         ),
         headlineLarge: TextStyle(
           fontSize: 32,
           fontWeight: FontWeight.w700,
           fontFamily: AppFonts.fontFamily,
+          color: AppColors.text,
         ),
       ),
       colorScheme: ColorScheme(
@@ -46,8 +49,8 @@ class AppTheme {
         error: Colors.redAccent,
         onError: AppColors.surface,
         surface: AppColors.surface,
-        onSurface: AppColors.onSurface,
-        onSurfaceVariant: AppColors.onSurface,
+        onSurface: AppColors.text,
+        onSurfaceVariant: AppColors.text,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -58,10 +61,10 @@ class AppTheme {
           textStyle: TextStyle(
             fontFamily: AppFonts.fontFamily,
             fontSize: 16,
-            fontWeight: FontWeight.w500
-          )
-        )
-      )
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
     );
   }
 }
