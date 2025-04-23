@@ -95,6 +95,7 @@ class AuthPage extends StatelessWidget {
                         width: double.maxFinite,
                         child: ElevatedButton.icon(
                           onPressed: () {
+                            print("********************************** START GOOGLE LOGIN");
                             context.read<UserBloc>().add(SignInWithGoogleEvent());
                           },
                           label: Text('Sign in with Google'),

@@ -4,4 +4,5 @@ import '../../../../core/model/either.dart';
 
 abstract class AuthRepository {
   Future<Either<AuthFailure, UserEntity>> signInWithGoogle();
+  Future<Either<Failure, void>> logOut();
 }

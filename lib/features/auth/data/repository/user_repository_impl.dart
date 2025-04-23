@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flash_meeting_app/core/model/either.dart';
 import 'package:flash_meeting_app/core/model/failure.dart';
@@ -18,6 +20,24 @@ class UserRepositoryImpl implements UserRepository {
       return Left(UserFailure(message: e.response?.data['message']));
     } catch (e) {
       return Left(UserFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> editUser({
+    required String name,
+    required String bio,
+    File? avatar,
+  }) async {
+    try {
+      if (avatar != null) {
+        await userRemoteDatasource.uploadAvatar(avatar);
+      }
+      return Right(await userRemoteDatasource.editUser(name, bio));
+    } on DioException catch (e) {
+      return Left(AuthFailure(message: e.response?.data['message']));
+    } catch (e) {
+      return Left(AuthFailure(message: e.toString()));
     }
   }
 }

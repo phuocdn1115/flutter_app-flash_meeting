@@ -14,6 +14,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     : super(UserState.initial()) {
     on<SignInWithGoogleEvent>(onSignInWithGoogleEvent);
     on<GetUserEvent>(onGetUserEvent);
+    on<SignOutEvent>(onSignOutEvent);
+    on<EditUserEvent>(onEditProfileEvent);
   }
 
   Future onSignInWithGoogleEvent(
@@ -21,6 +23,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     Emitter<UserState> emit,
   ) async {
     emit(state.copyWith(status: UserStatus.loading));
+    print("*********************************** AUTH REPOSITORY");
     var result = await authRepository.signInWithGoogle();
     result.fold(
       (l) {
@@ -43,5 +46,29 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(state.copyWith(status: UserStatus.success, userEntity: r));
       },
     );
+  }
+
+  Future onSignOutEvent(SignOutEvent event, Emitter<UserState> emit) async {
+    emit(state.copyWith(status: UserStatus.loading));
+    var result = await authRepository.logOut();
+    result.fold(
+      (l) {
+        emit(state.copyWith(status: UserStatus.error, errorMessage: l.message));
+      },
+      (r) {
+        emit(state.copyWith(status: UserStatus.logout));
+      },
+    );
+  }
+
+  Future onEditProfileEvent(EditUserEvent event, Emitter<UserState> emit) async {
+    emit(state.copyWith(status: UserStatus.loading));
+    var result = await userRepository.editUser(name: event.name, bio: event.bio, avatar: event.avatar);
+    result.fold((l) {
+      emit(state.copyWith(status: UserStatus.error, errorMessage: l.message));
+    }, (r) {
+      emit(state.copyWith(status: UserStatus.successEditProfile));
+      add(GetUserEvent());
+    });
   }
 }

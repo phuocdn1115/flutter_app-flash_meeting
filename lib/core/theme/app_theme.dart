@@ -40,7 +40,7 @@ class AppTheme {
           color: AppColors.text,
         ),
       ),
-      colorScheme: ColorScheme(
+      colorScheme: const ColorScheme(
         brightness: Brightness.light,
         primary: AppColors.primary,
         onPrimary: AppColors.surface,
@@ -50,7 +50,7 @@ class AppTheme {
         onError: AppColors.surface,
         surface: AppColors.surface,
         onSurface: AppColors.text,
-        onSurfaceVariant: AppColors.text,
+        onSurfaceVariant: AppColors.onSurface,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

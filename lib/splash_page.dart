@@ -1,6 +1,7 @@
 import 'package:flash_meeting_app/features/auth/presentation/bloc/user_bloc.dart';
 import 'package:flash_meeting_app/features/auth/presentation/bloc/user_state.dart';
 import 'package:flash_meeting_app/features/main/presentation/page/main_page.dart';
+import 'package:flash_meeting_app/features/profile/presentation/page/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -15,7 +16,7 @@ class SplashPage extends StatelessWidget {
       listener: (context, state) {
         print("************************************** STATE ${state.status}");
         if(state.status == UserStatus.success) {
-          context.go(MainPage.route);
+          context.go(ProfilePage.route);
         }
       },
       child: Scaffold(

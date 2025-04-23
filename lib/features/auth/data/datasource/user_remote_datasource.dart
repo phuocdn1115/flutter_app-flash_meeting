@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flash_meeting_app/features/auth/domain/entity/user_entity.dart';
 
@@ -7,7 +9,21 @@ class UserRemoteDatasource {
   UserRemoteDatasource({required this.dio});
 
   Future<UserEntity> getUser() async {
-    var request = await dio.get('user/profile');
+    var request = await dio.get('users/profile');
     return UserEntity.fromJson(request.data);
+  }
+
+  Future editUser(String name, String bio) async {
+    var response = await dio.put(
+      'users/profile',
+      data: {'name': name, 'bio': bio},
+    );
+    return;
+  }
+
+  Future uploadAvatar(File avatar) async {
+    var response = await dio.put('users/avatar', data: FormData.fromMap({
+      'avatar': MultipartFile.fromFileSync(avatar.path)
+    }));
   }
 }

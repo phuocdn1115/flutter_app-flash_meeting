@@ -20,21 +20,36 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<AuthFailure, UserEntity>> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
 
-      final credential = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
-      final firebaseCredentials = await FirebaseAuth.instance.signInWithCredential(credential);
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      final firebaseCredentials = await FirebaseAuth.instance
+          .signInWithCredential(credential);
 
       final token = await firebaseCredentials.user?.getIdToken();
       print("********************************************** FIRE BASE TOKEN");
 
-      if(token != null) {
+      if (token != null) {
         return Right(await authRemoteDatasource.signInWithGoogle(token));
       } else {
         return Left(AuthFailure(message: 'Auth failure'));
       }
-    } on DioException catch (e)  {
+    } on DioException catch (e) {
       return Left(AuthFailure(message: e.response?.data['message']));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> logOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      return Right(null);
+    } catch (e) {
+      return Left(AuthFailure(message: e.toString()));
     }
   }
 }

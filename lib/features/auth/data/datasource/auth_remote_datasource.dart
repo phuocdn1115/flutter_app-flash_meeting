@@ -9,6 +9,6 @@ class AuthRemoteDatasource {
     var request = await dio.post('/users/auth', data: {
       'token': token
     });
-    return UserEntity.fromJson(request.data);
+    return UserEntity.fromJson(request.data as Map<String, dynamic>);
   }
 }

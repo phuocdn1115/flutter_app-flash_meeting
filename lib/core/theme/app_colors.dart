@@ -6,5 +6,4 @@ class AppColors{
   static const Color surface = Color(0xFFF8F8F8);
   static const Color onSurface = Color(0xFFFFFFFF);
   static const Color text = Color(0xFF0E103F);
-
 }

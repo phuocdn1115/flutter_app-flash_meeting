@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flash_meeting_app/features/auth/domain/entity/user_entity.dart';
 
-enum UserStatus { initial, loading, success, error, logout }
+enum UserStatus { initial, loading, success, error, logout, successEditProfile }
 
 class UserState extends Equatable {
   final UserStatus status;

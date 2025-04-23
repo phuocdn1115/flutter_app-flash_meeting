@@ -16,7 +16,7 @@ void main() async {
   setUp();
   runApp(
     BlocProvider(
-      create: (context) => getIt<UserBloc>(),
+      create: (context) => getIt<UserBloc>()..add(GetUserEvent()),
       child: MaterialApp.router(
         theme: AppTheme.getTheme(),
         builder: (context, widget) {

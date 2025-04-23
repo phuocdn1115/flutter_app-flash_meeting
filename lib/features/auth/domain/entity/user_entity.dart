@@ -4,6 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'user_entity.g.dart';
 @JsonSerializable()
 class UserEntity extends Equatable {
+  @JsonKey(name: '_id')
   final String id;
   final String email;
   final String name;
