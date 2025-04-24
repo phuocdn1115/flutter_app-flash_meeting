@@ -13,8 +13,10 @@ class LocationPickerBloc
     on<SetLocationEvent>(onSetLocationEvent);
   }
 
-  Future onGetUserLocationEvent(GetUserLocationEvent event,
-      Emitter<LocationPickerState> emit,) async {
+  Future onGetUserLocationEvent(
+    GetUserLocationEvent event,
+    Emitter<LocationPickerState> emit,
+  ) async {
     emit(state.copyWith(status: LocationPickerStatus.loading));
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     print('****************************************** START PERMISSION');
@@ -30,17 +32,25 @@ class LocationPickerBloc
         return;
       }
       print('****************************************** GET LOCATION');
-      Position postion = await Geolocator.getCurrentPosition();
+      Position position = await Geolocator.getCurrentPosition();
       emit(
         state.copyWith(
-          location: LatLng(postion.latitude, postion.longitude),
+          location: LatLng(position.latitude, position.longitude),
           status: LocationPickerStatus.success,
         ),
       );
     }
   }
 
-  Future onSetLocationEvent(SetLocationEvent event, Emitter<LocationPickerState> emit) async {
-    emit(state.copyWith(location: event.location ))
+  Future onSetLocationEvent(
+    SetLocationEvent event,
+    Emitter<LocationPickerState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        location: event.location,
+        status: LocationPickerStatus.locationUpdated,
+      ),
+    );
   }
 }

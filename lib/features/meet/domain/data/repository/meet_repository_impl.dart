@@ -4,6 +4,8 @@ import 'package:flash_meeting_app/core/model/failure.dart';
 import 'package:flash_meeting_app/features/meet/domain/data/datasource/meet_remote_datasource.dart';
 import 'package:flash_meeting_app/features/meet/domain/entity/meet_entity.dart';
 import 'package:flash_meeting_app/features/meet/domain/repository/meet_repository.dart';
+import 'package:flutter/src/material/time.dart';
+import 'package:google_maps_flutter_platform_interface/src/types/location.dart';
 
 class MeetRepositoryImpl implements MeetRepository {
   final MeetRemoteDatasource meetRemoteDatasource;
@@ -18,6 +20,29 @@ class MeetRepositoryImpl implements MeetRepository {
     try {
       return Right(
         await meetRemoteDatasource.getLastMeets(page: page, limit: limit),
+      );
+    } on DioException catch (e) {
+      return Left(MeetFailure(message: e.response?.data['message']));
+    } catch (e) {
+      return Left(MeetFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, MeetEntity>> createMeet({
+    required String title,
+    required String description,
+    required TimeOfDay time,
+    required LatLng location,
+  }) async {
+    try {
+      return Right(
+        await meetRemoteDatasource.createMeet(
+          title: title,
+          desc: description,
+          time: time,
+          location: location,
+        ),
       );
     } on DioException catch (e) {
       return Left(MeetFailure(message: e.response?.data['message']));

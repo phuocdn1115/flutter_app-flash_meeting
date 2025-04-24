@@ -6,6 +6,7 @@ import 'package:flash_meeting_app/features/auth/data/repository/user_repository_
 import 'package:flash_meeting_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:flash_meeting_app/features/auth/domain/repository/user_repository.dart';
 import 'package:flash_meeting_app/features/auth/presentation/bloc/user_bloc.dart';
+import 'package:flash_meeting_app/features/create_meet/presentation/bloc/create_meet_bloc.dart';
 import 'package:flash_meeting_app/features/create_meet/presentation/bloc/location_picker_bloc.dart';
 import 'package:flash_meeting_app/features/meet/domain/data/datasource/meet_remote_datasource.dart';
 import 'package:flash_meeting_app/features/meet/domain/data/repository/meet_repository_impl.dart';
@@ -58,4 +59,5 @@ void registerBloc() {
   );
   getIt.registerFactory(() => LastMeetsBloc(meetRepository: getIt()));
   getIt.registerFactory(() => LocationPickerBloc());
+  getIt.registerFactory(() => CreateMeetBloc(meetRepository: getIt()));
 }

@@ -12,5 +12,5 @@ class UserFailure extends Failure {
 }
 
 class MeetFailure extends Failure {
-  MeetFailure({required super.message});
+  MeetFailure({ required super.message});
 }

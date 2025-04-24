@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-enum LocationPickerStatus { initial, loading, success, error }
+enum LocationPickerStatus { initial, loading, success, error, locationUpdated }
 
 class LocationPickerState extends Equatable {
   final LocationPickerStatus status;

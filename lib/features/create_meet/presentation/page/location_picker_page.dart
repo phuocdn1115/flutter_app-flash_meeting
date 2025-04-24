@@ -5,6 +5,7 @@ import 'package:flash_meeting_app/features/create_meet/presentation/bloc/locatio
 import 'package:flash_meeting_app/features/create_meet/presentation/bloc/location_picker_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class LocationPickerPage extends StatefulWidget {
@@ -58,6 +59,14 @@ class _LocationPickerPageState extends State<LocationPickerPage> {
                     zoom: 10,
                   ),
                   myLocationEnabled: true,
+                  onMapCreated: (controller) {
+                    mapController = controller;
+                  },
+                  onCameraMove: (camera) {
+                    context.read<LocationPickerBloc>().add(
+                      SetLocationEvent(location: camera.target),
+                    );
+                  },
                 ),
                 Center(
                   child: Icon(
@@ -70,7 +79,15 @@ class _LocationPickerPageState extends State<LocationPickerPage> {
                   bottom: 20,
                   left: 20,
                   right: 20,
-                  child: DefaultButton(text: 'Select', onPressed: () {}),
+                  child: DefaultButton(
+                    text: 'Select',
+                    onPressed:
+                        state.location != null
+                            ? () {
+                              context.pop(state.location);
+                            }
+                            : null,
+                  ),
                 ),
               ],
             ),
