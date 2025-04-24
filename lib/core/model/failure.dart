@@ -10,3 +10,7 @@ class AuthFailure extends Failure {
 class UserFailure extends Failure {
   UserFailure({required super.message});
 }
+
+class MeetFailure extends Failure {
+  MeetFailure({required super.message});
+}
