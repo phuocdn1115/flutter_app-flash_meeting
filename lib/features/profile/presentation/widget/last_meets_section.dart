@@ -11,9 +11,16 @@ class LastMeetsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LastMeetsBloc, LastMeetsState>(
       builder: (context, state) {
-        return ListView.builder(itemBuilder: (context, index) {
-          return LastMeetWidget(meetEntity: state.lastMeets![index]);
-        }, itemCount: state.lastMeets?.length ?? 0, shrinkWrap: true,);
+        return ListView.separated(
+          itemBuilder: (context, index) {
+            return LastMeetWidget(meetEntity: state.lastMeets![index]);
+          },
+          itemCount: state.lastMeets?.length ?? 0,
+          shrinkWrap: true,
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(height: 10,);
+          },
+        );
       },
     );
   }

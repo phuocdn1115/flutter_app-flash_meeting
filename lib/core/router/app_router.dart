@@ -2,6 +2,7 @@ import 'package:flash_meeting_app/features/auth/presentation/page/auth_page.dart
 import 'package:flash_meeting_app/features/create_meet/presentation/page/create_meet_page.dart';
 import 'package:flash_meeting_app/features/create_meet/presentation/page/location_picker_page.dart';
 import 'package:flash_meeting_app/features/main/presentation/page/main_page.dart';
+import 'package:flash_meeting_app/features/meet/presentation/page/meet_page.dart';
 import 'package:flash_meeting_app/features/profile/presentation/page/edit_profile_page.dart';
 import 'package:flash_meeting_app/features/profile/presentation/page/profile_page.dart';
 import 'package:flash_meeting_app/splash_page.dart';
@@ -51,6 +52,12 @@ class AppRouter {
         path: LocationPickerPage.route,
         builder: (context, state) {
           return LocationPickerPage();
+        },
+      ),
+      GoRoute(
+        path: '/meet/:id',
+        builder: (context, state) {
+          return MeetPage(meetId: state.pathParameters['id'] ?? '');
         },
       ),
     ],

@@ -50,4 +50,26 @@ class MeetRepositoryImpl implements MeetRepository {
       return Left(MeetFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, MeetEntity>> getMeet(String meetId) async {
+    try {
+      return Right(await meetRemoteDatasource.getMeet(meetId));
+    } on DioException catch (e) {
+      return Left(MeetFailure(message: e.response?.data['message']));
+    } catch (e) {
+      return Left(MeetFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> joinMeet(String meetId) async {
+    try {
+      return Right(await meetRemoteDatasource.joinMeet(meetId));
+    } on DioException catch (e) {
+      return Left(MeetFailure(message: e.response?.data['message']));
+    } catch (e) {
+      return Left(MeetFailure(message: e.toString()));
+    }
+  }
 }

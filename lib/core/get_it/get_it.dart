@@ -11,6 +11,7 @@ import 'package:flash_meeting_app/features/create_meet/presentation/bloc/locatio
 import 'package:flash_meeting_app/features/meet/domain/data/datasource/meet_remote_datasource.dart';
 import 'package:flash_meeting_app/features/meet/domain/data/repository/meet_repository_impl.dart';
 import 'package:flash_meeting_app/features/meet/domain/repository/meet_repository.dart';
+import 'package:flash_meeting_app/features/meet/presentation/bloc/meet_bloc.dart';
 import 'package:flash_meeting_app/features/profile/presentation/bloc/last_meets_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -60,4 +61,5 @@ void registerBloc() {
   getIt.registerFactory(() => LastMeetsBloc(meetRepository: getIt()));
   getIt.registerFactory(() => LocationPickerBloc());
   getIt.registerFactory(() => CreateMeetBloc(meetRepository: getIt()));
+  getIt.registerFactory(() => MeetBloc(meetRepository: getIt()));
 }

@@ -16,4 +16,8 @@ abstract class MeetRepository {
     required TimeOfDay time,
     required LatLng location,
   });
+
+  Future<Either<Failure, MeetEntity>> getMeet(String meetId);
+
+  Future<Either<Failure, void>> joinMeet(String meetId);
 }

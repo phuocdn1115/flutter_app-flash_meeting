@@ -28,4 +28,14 @@ class MeetRemoteDatasource {
     });
     return MeetEntity.fromJson(result.data);
   }
+
+  Future<MeetEntity> getMeet(String meetId) async {
+    var result = await dio.get('/meetings/${meetId}');
+    return MeetEntity.fromJson(result.data);
+  }
+
+  Future joinMeet(String meetId) async {
+    var result = await dio.post('/meetings/$meetId/join');
+    return;
+  }
 }
