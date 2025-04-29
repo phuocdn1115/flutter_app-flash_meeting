@@ -18,14 +18,26 @@ class MeetRemoteDatasource {
         .toList();
   }
 
-  Future<MeetEntity> createMeet({required String title, required String desc, required TimeOfDay time, required LatLng location}) async {
-    var result = await dio.post('/meetings/', data: {
-      'title': title,
-      'description': desc,
-      'date': DateTime.now().copyWith(hour: time.hour, minute: time.minute).toUtc().toIso8601String(),
-      'latitude': location.latitude,
-      'longitude': location.longitude
-    });
+  Future<MeetEntity> createMeet({
+    required String title,
+    required String desc,
+    required TimeOfDay time,
+    required LatLng location,
+  }) async {
+    var result = await dio.post(
+      '/meetings/',
+      data: {
+        'title': title,
+        'description': desc,
+        'date':
+            DateTime.now()
+                .copyWith(hour: time.hour, minute: time.minute)
+                .toUtc()
+                .toIso8601String(),
+        'latitude': location.latitude,
+        'longitude': location.longitude,
+      },
+    );
     return MeetEntity.fromJson(result.data);
   }
 
@@ -36,6 +48,32 @@ class MeetRemoteDatasource {
 
   Future joinMeet(String meetId) async {
     var result = await dio.post('/meetings/$meetId/join');
+    return;
+  }
+
+  Future kickUser(String meetId, String userIdToKick) async {
+    var result = await dio.post(
+      '/meetings/$meetId/kick',
+      data: {'userIdToKick': userIdToKick},
+    );
+    return;
+  }
+
+  Future transferAdmin(String meetId, String newAdminId) async {
+    var rs = await dio.post(
+      '/meetings/$meetId/transferAdmin',
+      data: {'newAdminId': newAdminId},
+    );
+    return;
+  }
+
+  Future leaveMeet(String meetId) async {
+    var rs = await dio.post('/meetings/$meetId/leave');
+    return;
+  }
+
+  Future cancelMeet(String meetId) async {
+    var rs = await dio.post('/meetings/$meetId/cancel');
     return;
   }
 }

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flash_meeting_app/features/meet/domain/entity/meet_entity.dart';
 
-enum MeetStatus { initial, loading, success, error }
+enum MeetStatus { initial, loading, success, error, canceled, left }
 
 class MeetState extends Equatable {
   final MeetStatus status;

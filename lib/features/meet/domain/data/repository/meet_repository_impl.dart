@@ -72,4 +72,48 @@ class MeetRepositoryImpl implements MeetRepository {
       return Left(MeetFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> kickUser(String meetId, String userToKickId) async {
+    try {
+      return Right(await meetRemoteDatasource.kickUser(meetId, userToKickId));
+    } on DioException catch (e) {
+      return Left(MeetFailure(message: e.response?.data['message']));
+    } catch (e) {
+      return Left(MeetFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> transferAdmin(String meetId, String newAdminId) async {
+    try {
+      return Right(await meetRemoteDatasource.transferAdmin(meetId, newAdminId));
+    } on DioException catch (e) {
+    return Left(MeetFailure(message: e.response?.data['message']));
+    } catch (e) {
+    return Left(MeetFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> cancelMeet(String meetId) async {
+    try {
+      return Right(await meetRemoteDatasource.cancelMeet(meetId));
+    } on DioException catch (e) {
+      return Left(MeetFailure(message: e.response?.data['message']));
+    } catch (e) {
+      return Left(MeetFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> leaveMeet(String meetId) async {
+    try {
+      return Right(await meetRemoteDatasource.leaveMeet(meetId));
+    } on DioException catch (e) {
+      return Left(MeetFailure(message: e.response?.data['message']));
+    } catch (e) {
+      return Left(MeetFailure(message: e.toString()));
+    }
+  }
 }

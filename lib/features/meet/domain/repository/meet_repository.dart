@@ -20,4 +20,12 @@ abstract class MeetRepository {
   Future<Either<Failure, MeetEntity>> getMeet(String meetId);
 
   Future<Either<Failure, void>> joinMeet(String meetId);
+
+  Future<Either<Failure, void>> kickUser(String meetId, String userToKickId);
+
+  Future<Either<Failure, void>> transferAdmin(String meetId, String newAdminId);
+
+  Future<Either<Failure, void>> leaveMeet(String meetId);
+
+  Future<Either<Failure, void>> cancelMeet(String meetId);
 }

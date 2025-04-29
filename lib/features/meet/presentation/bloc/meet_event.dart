@@ -7,6 +7,25 @@ class GetMeetEvent extends MeetEvent {
 }
 
 class JoinMeetEvent extends MeetEvent {
+}
 
-  JoinMeetEvent();
+class KickUserEvent extends MeetEvent {
+  final String userId;
+
+  KickUserEvent({required this.userId});
+
+}
+
+class TransferAdminEvent extends MeetEvent {
+  final String userId;
+
+  TransferAdminEvent({required this.userId});
+}
+
+class CancelMeetEvent extends MeetEvent {
+
+}
+
+class LeaveMeetEvent extends MeetEvent {
+
 }

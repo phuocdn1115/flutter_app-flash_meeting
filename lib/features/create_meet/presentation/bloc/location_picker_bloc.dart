@@ -19,19 +19,15 @@ class LocationPickerBloc
   ) async {
     emit(state.copyWith(status: LocationPickerStatus.loading));
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    print('****************************************** START PERMISSION');
     if (!serviceEnabled) {
       return;
     }
-    print('****************************************** CHECK PERMISSION');
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
-      print('****************************************** REQUEST PERMISSION');
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.deniedForever) {
         return;
       }
-      print('****************************************** GET LOCATION');
       Position position = await Geolocator.getCurrentPosition();
       emit(
         state.copyWith(

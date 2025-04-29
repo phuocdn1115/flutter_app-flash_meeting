@@ -8,6 +8,7 @@ import 'package:flash_meeting_app/features/meet/presentation/widget/meet_details
 import 'package:flash_meeting_app/features/meet/presentation/widget/meet_location_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class MeetPage extends StatelessWidget {
   final String meetId;
@@ -21,7 +22,11 @@ class MeetPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<MeetBloc>()..add(GetMeetEvent(meetId: meetId)),
       child: BlocConsumer<MeetBloc, MeetState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if( state.status == MeetStatus.left || state.status == MeetStatus.canceled) {
+            context.pop();
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
